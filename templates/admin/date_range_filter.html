@@ -1,0 +1,8 @@
+{% load widget_tweaks %}
+
+<div class="custom-date-range-form">
+    <label for="{{ form.start_time.id_for_label }}">起始时间：</label>
+    {% render_field form.start_time %}
+    <label for="{{ form.end_time.id_for_label }}">终止时间：</label>
+    {% render_field form.end_time %}
+</div>

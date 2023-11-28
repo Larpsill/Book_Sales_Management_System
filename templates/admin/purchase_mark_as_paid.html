@@ -1,0 +1,36 @@
+<!-- 8.添加新书 添加到库存中再添加零售价格-->
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<div id="mark-as-paid-dialog" title="标记为已付款">
+  <form method="post" action="{% url 'admin:purchase_mark_as_paid' object_id=purchase.pk %}">
+    {% csrf_token %}
+    <p>
+      <label for="id_sellprice">销售价格:</label>
+      <input type="text" name="sellprice" id="id_sellprice" required>
+    </p>
+    <p>
+      <input type="submit" value="确认">
+    </p>
+  </form>
+</div>
+
+<script>
+  (function($) {
+    $(function() {
+      $('#mark-as-paid-dialog').dialog({
+        autoOpen: true,
+        modal: true,
+        width: 400,
+        height: 'auto',
+        resizable: false,
+        draggable: false,
+        closeOnEscape: false,
+        open: function(event, ui) {
+          $('.ui-dialog-titlebar-close', ui.dialog | ui).hide();
+        }
+      });
+    });
+  })(django.jQuery);
+</script>
+{% endblock %}

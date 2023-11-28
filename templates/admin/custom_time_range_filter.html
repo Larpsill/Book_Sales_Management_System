@@ -1,0 +1,9 @@
+{% load i18n static %}
+
+<div class="grp-date-range-filter">
+  <h3>{{ title }}</h3>
+  <div class="grp-daterangefilter">
+    <input type="text" class="vDateField" name="{{ parameter_name }}_0" id="{{ parameter_name }}_0" placeholder="{% trans 'From date' %}" value="{{ request.GET.parameter_name_0 }}">
+    <input type="text" class="vDateField" name="{{ parameter_name }}_1" id="{{ parameter_name }}_1" placeholder="{% trans 'To date' %}" value="{{ request.GET.parameter_name_1 }}">
+  </div>
+</div>

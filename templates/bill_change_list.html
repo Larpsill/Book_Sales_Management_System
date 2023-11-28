@@ -1,0 +1,63 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+  <div class="container-fluid">
+    <h1 class="h3 mb-3">{{ title }}</h1>
+    <div class="card">
+      <div class="card-body">
+        <form method="get">
+          {% csrf_token %}
+          <div class="form-group row">
+            <label for="start_time" class="col-sm-2 col-form-label">起始时间</label>
+            <div class="col-sm-4">
+              <input type="date" class="form-control" id="start_time" name="start_time" value="{{ start_time }}">
+            </div>
+            <label for="end_time" class="col-sm-2 col-form-label">结束时间</label>
+            <div class="col-sm-4">
+              <input type="date" class="form-control" id="end_time" name="end_time" value="{{ end_time }}">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">筛选</button>
+        </form>
+      </div>
+    </div>
+    {% if cl.result_count %}
+      <div class="card">
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>账单编号</th>
+                  <th>创建时间</th>
+                  <th>操作用户</th>
+                  <th>类型</th>
+                  <th>图书名称</th>
+                  <th>单价</th>
+                  <th>数量</th>
+                  <th>金额</th>
+                  <th>备注</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for obj in cl.result_list %}
+                  <tr class="{% cycle 'row1' 'row2' %}">
+                    <td>{{ obj.id }}</td>
+                    <td>{{ obj.bill_time }}</td>
+                    <td>{{ obj.username }}</td>
+                    <td>{{ obj.get_type_display }}</td>
+                    <td>{{ obj.book.book_name }}</td>
+                    <td>{{ obj.price }}</td>
+                    <td>{{ obj.quantity }}</td>
+                    <td>{{ obj.amount }}</td>
+                    <td>{{ obj.description }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}
